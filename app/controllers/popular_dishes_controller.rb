@@ -1,6 +1,7 @@
 class PopularDishesController < ApplicationController
   def index
-    @popular_dishes = PopularDish.page(params[:page]).per(10)
+    @q = PopularDish.ransack(params[:q])
+    @popular_dishes = @q.result(:distinct => true).includes(:favorites, :venue).page(params[:page]).per(10)
 
     render("popular_dishes/index.html.erb")
   end
