@@ -56,6 +56,35 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_popular_dish" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for venue_id -->
+      <div class="form-group">
+        <label for="venue_id" class="control-label">
+          Venue
+        </label>
+
+        <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for favorites_id -->
+      <div class="form-group">
+        <label for="favorites_id" class="control-label">
+          Favorites
+        </label>
+
+        <%= select_tag(:favorites_id, options_from_collection_for_select(Favorite.all, :id, :dish_id), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Popular Dish
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
