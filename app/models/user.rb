@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   # Direct associations
 
-  has_many   :favorites,
+  has_one    :bucket_list,
+             :class_name => "Bucketlist",
              :dependent => :destroy
 
   # Indirect associations
