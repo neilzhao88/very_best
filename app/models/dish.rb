@@ -3,7 +3,7 @@ class Dish < ApplicationRecord
 
   belongs_to :venue
 
-  has_many   :favorites,
+  has_many   :bookmarks,
              :dependent => :destroy
 
   # Indirect associations
