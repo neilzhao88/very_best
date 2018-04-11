@@ -17,7 +17,7 @@
       <% @popular_dishes.each do |popular_dish| %>
       <tr>
         <td><%= popular_dish.venue.name %></td>
-        <td><%= popular_dish.favorites_id %></td>
+        <td><%= popular_dish.favorites.dish_id %></td>
         <td>
           <a href="/popular_dishes/<%= popular_dish.id %>" class="btn btn-primary">Show</a>
           <a href="/popular_dishes/<%= popular_dish.id %>/edit" class="btn btn-warning">Edit</a>
