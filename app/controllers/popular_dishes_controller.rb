@@ -1,6 +1,6 @@
 class PopularDishesController < ApplicationController
   def index
-    @popular_dishes = PopularDish.all
+    @popular_dishes = PopularDish.page(params[:page]).per(10)
 
     render("popular_dishes/index.html.erb")
   end
