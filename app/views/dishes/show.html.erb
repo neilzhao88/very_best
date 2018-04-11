@@ -5,11 +5,14 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Venue</dt>
+      <dt>Name</dt>
+      <dd><%= @dish.name %></dd>
+
+      <dt>Bookmarks</dt>
       <dd>
-        <% if @dish.venue.present? %>
-          <a href="/venues/<%= @dish.venue_id %>">
-            <%= @dish.venue.name %>
+        <% if @dish.bookmarks.present? %>
+          <a href="/bookmarks/<%= @dish.bookmarks_id %>">
+            <%= @dish.bookmarks.dish_id %>
           </a>
         <% end %>
       </dd>
@@ -27,53 +30,5 @@
         Delete
       </a>
     </div>
-  </div>
-</div>
-
-<!-- A Dish has many favorites -->
-
-<div class="row">
-  <div class="col-md-12">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-info">
-        Favorites
-      </li>
-
-      <% @dish.favorites.each do |favorite| %>
-        <li class="list-group-item">
-          <a href="/favorites/<%= favorite.id %>">
-            <%= favorite.dish_id %>
-          </a>
-          <div class="btn-group btn-group-xs pull-right">
-            <a href="/favorites/<%= favorite.id %>" class="btn btn-primary">
-              <i class="fa fa-search-plus"></i>
-            </a>
-            <a href="/favorites/<%= favorite.id %>/edit" class="btn btn-warning">
-              <i class="fa fa-edit"></i>
-            </a>
-            <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-danger" rel="nofollow">
-              <i class="fa fa-trash-o"></i>
-            </a>
-          </div>
-        </li>
-      <% end %>
-
-      <li class="list-group-item">
-        <form action="/create_favorite" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-      <!-- Label and input for dish_id -->
-      <input type="hidden" name="dish_id" value="<%= @dish.id %>">
-
-      <!-- Label and input for user_id -->
-      <input type="hidden" name="user_id" value="<%= current_user.id %>">
-
-      <button class="btn btn-block btn-success">
-        Create Favorite
-      </button>
-    </form>
-      </li>
-    </ul>
   </div>
 </div>

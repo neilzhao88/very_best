@@ -1,11 +1,11 @@
 <div class="page-header">
   <h1>
-    Favorites
-    <a href="/favorites/new" class="btn btn-lg btn-success">New Favorite</a>
+    Bucketlists
+    <a href="/bucketlists/new" class="btn btn-lg btn-success">New Bucketlist</a>
   </h1>
 </div><div class="row mb-1">
   <div class="col-md-12">
-    <%= search_form_for @q, :class => collapse_search_form, :id => "favorites_filters" do |f| %>
+    <%= search_form_for @q, :class => collapse_search_form, :id => "bucketlists_filters" do |f| %>
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
@@ -53,11 +53,23 @@
       <%= f.text_field :user_email_cont, :class => "form-control", :placeholder => "User email contains" %>
     </div>
 
+<div class="form-group">
+  <%= f.label :dish_id, "Bookmark Dish" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :bookmarks_dish_id_gteq, :class => "form-control", :placeholder => "Bookmark Dish greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :bookmarks_dish_id_lteq, :class => "form-control", :placeholder => "Bookmark Dish less than or equal to" %>
+    </div>
+  </div>
+</div>
+
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
-      <a href="/favorites" class="btn btn-default btn-block mb-1">Clear filters</a>
+      <a href="/bucketlists" class="btn btn-default btn-block mb-1">Clear filters</a>
     <% end %>
-    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#favorites_filters">
+    <a class="btn btn-default btn-block mb-1" data-toggle="collapse" href="#bucketlists_filters">
       Show Filters
     </a>
   </div>
@@ -67,38 +79,30 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Dish</th>
         <th>User</th>
         <th>Actions</th>
       </tr>
 
-      <% @favorites.each do |favorite| %>
+      <% @bucketlists.each do |bucketlist| %>
       <tr>
         <td>
-          <% if favorite.dish.present? %>
-            <a href="/dishes/<%= favorite.dish.id %>">
-              <%= favorite.dish.venue_id %>
+          <% if bucketlist.user.present? %>
+            <a href="/users/<%= bucketlist.user.id %>">
+              <%= bucketlist.user.email %>
             </a>
           <% end %>
         </td>
         <td>
-          <% if favorite.user.present? %>
-            <a href="/users/<%= favorite.user.id %>">
-              <%= favorite.user.email %>
-            </a>
-          <% end %>
-        </td>
-        <td>
-          <a href="/favorites/<%= favorite.id %>" class="btn btn-primary">Show</a>
+          <a href="/bucketlists/<%= bucketlist.id %>" class="btn btn-primary">Show</a>
           
-          <% if current_user == favorite.user %>
-            <a href="/favorites/<%= favorite.id %>/edit" class="btn btn-warning">Edit</a>
-            <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% if current_user == bucketlist.user %>
+            <a href="/bucketlists/<%= bucketlist.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_bucketlist/<%= bucketlist.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
           <% end %>
         </td>
       </tr>
       <% end %>
     </table>
-    <%= paginate @favorites, theme: 'twitter-bootstrap-4' %>
+    <%= paginate @bucketlists, theme: 'twitter-bootstrap-4' %>
   </div>
 </div>

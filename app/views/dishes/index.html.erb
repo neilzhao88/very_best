@@ -9,6 +9,11 @@
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
+  </div>
+
+<div class="form-group">
           <%= f.label :created_at, "Created at" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -53,6 +58,18 @@
       <%= f.text_field :venue_name_cont, :class => "form-control", :placeholder => "Venue name contains" %>
     </div>
 
+<div class="form-group">
+  <%= f.label :dish_id, "Bookmark Dish" %>
+  <div class="row">
+    <div class='col-md-6 mb-1'>
+      <%= f.text_field :bookmarks_dish_id_gteq, :class => "form-control", :placeholder => "Bookmark Dish greater than or equal to" %>
+    </div>
+    <div class='col-md-6'>
+      <%= f.text_field :bookmarks_dish_id_lteq, :class => "form-control", :placeholder => "Bookmark Dish less than or equal to" %>
+    </div>
+  </div>
+</div>
+
       <%= f.submit :class => "btn btn-primary btn-block mb-1" %>
 
       <a href="/dishes" class="btn btn-default btn-block mb-1">Clear filters</a>
@@ -67,16 +84,18 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Venue</th>
+        <th>Name</th>
+        <th>Bookmarks</th>
         <th>Actions</th>
       </tr>
 
       <% @dishes.each do |dish| %>
       <tr>
+        <td><%= dish.name %></td>
         <td>
-          <% if dish.venue.present? %>
-            <a href="/venues/<%= dish.venue.id %>">
-              <%= dish.venue.name %>
+          <% if dish.bookmarks.present? %>
+            <a href="/bookmarks/<%= dish.bookmarks.id %>">
+              <%= dish.bookmarks.dish_id %>
             </a>
           <% end %>
         </td>
