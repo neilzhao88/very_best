@@ -1,21 +1,15 @@
 <div class="page-header">
-  <h3>Dish #<%= @dish.id %></h3>
+  <h3>Bucketlist #<%= @bucketlist.id %></h3>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd><%= @dish.name %></dd>
-
-      <dt>Bookmarks</dt>
-      <dd><%= @dish.bookmarks_id %></dd>
-
-      <dt>Venue</dt>
+      <dt>User</dt>
       <dd>
-        <% if @dish.venue.present? %>
-          <a href="/venues/<%= @dish.venue_id %>">
-            <%= @dish.venue.name %>
+        <% if @bucketlist.user.present? %>
+          <a href="/users/<%= @bucketlist.user_id %>">
+            <%= @bucketlist.user.email %>
           </a>
         <% end %>
       </dd>
@@ -23,20 +17,22 @@
     </dl>
 
     <div class="btn-group btn-group-justified">
-      <a href="/dishes" class="btn btn-primary">
+      <a href="/bucketlists" class="btn btn-primary">
         Back
       </a>
-      <a href="/dishes/<%= @dish.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_dish/<%= @dish.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+      <% if current_user == @bucketlist.user %>
+        <a href="/bucketlists/<%= @bucketlist.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_bucketlist/<%= @bucketlist.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
+      <% end %>
     </div>
   </div>
 </div>
 
-<!-- A Dish has many bookmarks -->
+<!-- A Bucketlist has many bookmarks -->
 
 <div class="row">
   <div class="col-md-12">
@@ -45,7 +41,7 @@
         Bookmarks
       </li>
 
-      <% @dish.bookmarks.each do |bookmark| %>
+      <% @bucketlist.bookmarks.each do |bookmark| %>
         <li class="list-group-item">
           <a href="/bookmarks/<%= bookmark.id %>">
             <%= bookmark.dish_id %>
@@ -70,16 +66,16 @@
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Label and input for dish_id -->
-      <input type="hidden" name="dish_id" value="<%= @dish.id %>">
-
-      <!-- Label and input for bucketlist_id -->
       <div class="form-group">
-        <label for="bucketlist_id" class="control-label">
-          Bucketlist
+        <label for="dish_id" class="control-label">
+          Dish
         </label>
 
-        <%= select_tag(:bucketlist_id, options_from_collection_for_select(Bucketlist.all, :id, :user_id), :class => "form-control") %>
+        <%= select_tag(:dish_id, options_from_collection_for_select(Dish.all, :id, :created_at), :class => "form-control") %>
       </div>
+
+      <!-- Label and input for bucketlist_id -->
+      <input type="hidden" name="bucketlist_id" value="<%= @bucketlist.id %>">
 
       <button class="btn btn-block btn-success">
         Create Bookmark

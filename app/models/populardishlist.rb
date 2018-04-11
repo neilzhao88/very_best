@@ -1,10 +1,7 @@
-class Dish < ApplicationRecord
+class Populardishlist < ApplicationRecord
   # Direct associations
 
   belongs_to :venue
-
-  has_many   :bookmarks,
-             :dependent => :destroy
 
   # Indirect associations
 

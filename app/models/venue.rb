@@ -1,10 +1,11 @@
 class Venue < ApplicationRecord
   # Direct associations
 
-  has_one    :popular_dish,
+  has_many   :dishes,
              :dependent => :destroy
 
-  has_many   :dishes,
+  has_many   :popular_dishes,
+             :class_name => "Populardishlist",
              :dependent => :destroy
 
   # Indirect associations
