@@ -9,6 +9,11 @@
       <p class="lead">Narrow results:</p>
 
         <div class="form-group">
+    <%= f.label :name_cont, "Name contains" %>
+    <%= f.text_field :name_cont, :class => "form-control", :placeholder => "Name contains" %>
+  </div>
+
+<div class="form-group">
           <%= f.label :created_at, "Created at" %>
           <div class="row">
             <div class='col-md-6 mb-1'>
@@ -67,12 +72,14 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
+        <th>Name</th>
         <th>Venue</th>
         <th>Actions</th>
       </tr>
 
       <% @dishes.each do |dish| %>
       <tr>
+        <td><%= dish.name %></td>
         <td>
           <% if dish.venue.present? %>
             <a href="/venues/<%= dish.venue.id %>">
