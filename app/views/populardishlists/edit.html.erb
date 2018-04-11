@@ -1,6 +1,6 @@
 <!-- Validation failure messages -->
-<% if @popular_dish.errors.any? %>
-  <% @popular_dish.errors.full_messages.each do |message| %>
+<% if @populardishlist.errors.any? %>
+  <% @populardishlist.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <%= message %>
@@ -9,12 +9,12 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Popular Dish #<%= @popular_dish.id %></h3>
+  <h3>Edit Populardishlist #<%= @populardishlist.id %></h3>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <form action="/update_popular_dish/<%= @popular_dish.id %>" method="post">
+    <form action="/update_populardishlist/<%= @populardishlist.id %>" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -24,23 +24,23 @@
           Venue
         </label>
 
-        <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name, @popular_dish.venue_id), :class => "form-control") %>
+        <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name, @populardishlist.venue_id), :class => "form-control") %>
       </div>
 
-      <!-- Label and input for favorites_id -->
+      <!-- Label and input for bookmarks_id -->
       <div class="form-group">
-        <label for="favorites_id" class="control-label">
-          Favorites
+        <label for="bookmarks_id" class="control-label">
+          Bookmarks
         </label>
 
-        <%= select_tag(:favorites_id, options_from_collection_for_select(Favorite.all, :id, :dish_id, @popular_dish.favorites_id), :class => "form-control") %>
+        <input type="text" id="bookmarks_id" name="bookmarks_id" placeholder="Bookmarks" class="form-control" value="<%= @populardishlist.bookmarks_id %>">
       </div>
 
       <button class="btn btn-warning">
-        Update Popular Dish
+        Update Populardishlist
       </button>
       or
-      <a href="/popular_dishes/<%= @popular_dish.id %>">Cancel</a>
+      <a href="/populardishlists/<%= @populardishlist.id %>">Cancel</a>
     </form>
   </div>
 </div>
