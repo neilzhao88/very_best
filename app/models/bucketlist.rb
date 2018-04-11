@@ -1,10 +1,7 @@
-class Favorite < ApplicationRecord
+class Bucketlist < ApplicationRecord
   # Direct associations
 
-  belongs_to :dish
-
-  has_many   :popular_dishes,
-             :foreign_key => "favorites_id",
+  has_many   :bookmarks,
              :dependent => :destroy
 
   belongs_to :user
