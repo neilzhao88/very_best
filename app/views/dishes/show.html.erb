@@ -5,6 +5,9 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @dish.name %></dd>
+
       <dt>Venue</dt>
       <dd>
         <% if @dish.venue.present? %>
@@ -13,6 +16,9 @@
           </a>
         <% end %>
       </dd>
+
+      <dt>Cuisine</dt>
+      <dd><%= @dish.cuisine %></dd>
 
     </dl>
 
@@ -30,28 +36,28 @@
   </div>
 </div>
 
-<!-- A Dish has many favorites -->
+<!-- A Dish has many bookmarks -->
 
 <div class="row">
   <div class="col-md-12">
     <ul class="list-group">
       <li class="list-group-item list-group-item-info">
-        Favorites
+        Bookmarks
       </li>
 
-      <% @dish.favorites.each do |favorite| %>
+      <% @dish.bookmarks.each do |bookmark| %>
         <li class="list-group-item">
-          <a href="/favorites/<%= favorite.id %>">
-            <%= favorite.dish_id %>
+          <a href="/bookmarks/<%= bookmark.id %>">
+            <%= bookmark.dish_id %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
-            <a href="/favorites/<%= favorite.id %>" class="btn btn-primary">
+            <a href="/bookmarks/<%= bookmark.id %>" class="btn btn-primary">
               <i class="fa fa-search-plus"></i>
             </a>
-            <a href="/favorites/<%= favorite.id %>/edit" class="btn btn-warning">
+            <a href="/bookmarks/<%= bookmark.id %>/edit" class="btn btn-warning">
               <i class="fa fa-edit"></i>
             </a>
-            <a href="/delete_favorite/<%= favorite.id %>" class="btn btn-danger" rel="nofollow">
+            <a href="/delete_bookmark/<%= bookmark.id %>" class="btn btn-danger" rel="nofollow">
               <i class="fa fa-trash-o"></i>
             </a>
           </div>
@@ -59,7 +65,7 @@
       <% end %>
 
       <li class="list-group-item">
-        <form action="/create_favorite" method="post">
+        <form action="/create_bookmark" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
@@ -69,8 +75,17 @@
       <!-- Label and input for user_id -->
       <input type="hidden" name="user_id" value="<%= current_user.id %>">
 
+      <!-- Label and input for venue_id -->
+      <div class="form-group">
+        <label for="venue_id" class="control-label">
+          Venue
+        </label>
+
+        <%= select_tag(:venue_id, options_from_collection_for_select(Venue.all, :id, :name), :class => "form-control") %>
+      </div>
+
       <button class="btn btn-block btn-success">
-        Create Favorite
+        Create Bookmark
       </button>
     </form>
       </li>
