@@ -1,13 +1,13 @@
 class VenuesController < ApplicationController
   def index
     @q = Venue.ransack(params[:q])
-    @venues = @q.result(:distinct => true).includes(:dishes, :popular_dish).page(params[:page]).per(10)
+    @venues = @q.result(:distinct => true).includes(:bookmarks).page(params[:page]).per(10)
 
     render("venues/index.html.erb")
   end
 
   def show
-    @dish = Dish.new
+    @bookmark = Bookmark.new
     @venue = Venue.find(params[:id])
 
     render("venues/show.html.erb")
@@ -23,7 +23,6 @@ class VenuesController < ApplicationController
     @venue = Venue.new
 
     @venue.name = params[:name]
-    @venue.cuisine = params[:cuisine]
     @venue.neighborhood = params[:neighborhood]
     @venue.address = params[:address]
 
@@ -53,7 +52,6 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
 
     @venue.name = params[:name]
-    @venue.cuisine = params[:cuisine]
     @venue.neighborhood = params[:neighborhood]
     @venue.address = params[:address]
 
