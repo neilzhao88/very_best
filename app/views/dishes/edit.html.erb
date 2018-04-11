@@ -18,6 +18,24 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @dish.name %>">
+      </div>
+
+      <!-- Label and input for bookmarks_id -->
+      <div class="form-group">
+        <label for="bookmarks_id" class="control-label">
+          Bookmarks
+        </label>
+
+        <input type="text" id="bookmarks_id" name="bookmarks_id" placeholder="Bookmarks" class="form-control" value="<%= @dish.bookmarks_id %>">
+      </div>
+
       <!-- Label and input for venue_id -->
       <div class="form-group">
         <label for="venue_id" class="control-label">
