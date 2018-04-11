@@ -26,3 +26,34 @@
     </div>
   </div>
 </div>
+
+<!-- A Favorite has many popular_dishes -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Popular Dishes
+      </li>
+
+      <% @favorite.popular_dishes.each do |popular_dish| %>
+        <li class="list-group-item">
+          <a href="/popular_dishes/<%= popular_dish.id %>">
+            <%= popular_dish.venue_id %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/popular_dishes/<%= popular_dish.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/popular_dishes/<%= popular_dish.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_popular_dish/<%= popular_dish.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
