@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "favorites#index"
   # Routes for the Popular_dish resource:
   # CREATE
   get "/popular_dishes/new", :controller => "popular_dishes", :action => "new"
