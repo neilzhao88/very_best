@@ -1,13 +1,14 @@
 class DishesController < ApplicationController
   def index
     @q = Dish.ransack(params[:q])
-    @dishes = @q.result(:distinct => true).includes(:favorites, :venue).page(params[:page]).per(10)
+    @dishes = @q.result(:distinct => true).includes(:bookmarks, :venues).page(params[:page]).per(10)
 
     render("dishes/index.html.erb")
   end
 
   def show
-    @favorite = Favorite.new
+    @venue = Venue.new
+    @bookmark = Bookmark.new
     @dish = Dish.find(params[:id])
 
     render("dishes/show.html.erb")
@@ -22,7 +23,9 @@ class DishesController < ApplicationController
   def create
     @dish = Dish.new
 
+    @dish.name = params[:name]
     @dish.venue_id = params[:venue_id]
+    @dish.cuisine = params[:cuisine]
 
     save_status = @dish.save
 
@@ -49,7 +52,9 @@ class DishesController < ApplicationController
   def update
     @dish = Dish.find(params[:id])
 
+    @dish.name = params[:name]
     @dish.venue_id = params[:venue_id]
+    @dish.cuisine = params[:cuisine]
 
     save_status = @dish.save
 
