@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  # Routes for the Popular_dish resource:
+  # CREATE
+  get "/popular_dishes/new", :controller => "popular_dishes", :action => "new"
+  post "/create_popular_dish", :controller => "popular_dishes", :action => "create"
+
+  # READ
+  get "/popular_dishes", :controller => "popular_dishes", :action => "index"
+  get "/popular_dishes/:id", :controller => "popular_dishes", :action => "show"
+
+  # UPDATE
+  get "/popular_dishes/:id/edit", :controller => "popular_dishes", :action => "edit"
+  post "/update_popular_dish/:id", :controller => "popular_dishes", :action => "update"
+
+  # DELETE
+  get "/delete_popular_dish/:id", :controller => "popular_dishes", :action => "destroy"
+  #------------------------------
+
   # Routes for the Venue resource:
   # CREATE
   get "/venues/new", :controller => "venues", :action => "new"
