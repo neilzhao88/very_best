@@ -8,9 +8,6 @@
       <dt>Name</dt>
       <dd><%= @venue.name %></dd>
 
-      <dt>Cuisine</dt>
-      <dd><%= @venue.cuisine %></dd>
-
       <dt>Neighborhood</dt>
       <dd><%= @venue.neighborhood %></dd>
 
@@ -45,7 +42,7 @@
       <% @venue.dishes.each do |dish| %>
         <li class="list-group-item">
           <a href="/dishes/<%= dish.id %>">
-            <%= dish.venue_id %>
+            <%= dish.created_at %>
           </a>
           <div class="btn-group btn-group-xs pull-right">
             <a href="/dishes/<%= dish.id %>" class="btn btn-primary">
@@ -66,8 +63,26 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="">
+      </div>
+
       <!-- Label and input for venue_id -->
       <input type="hidden" name="venue_id" value="<%= @venue.id %>">
+
+      <!-- Label and input for cuisine -->
+      <div class="form-group">
+        <label for="cuisine" class="control-label">
+          Cuisine
+        </label>
+
+        <input type="text" id="cuisine" name="cuisine" placeholder="Cuisine" class="form-control" value="">
+      </div>
 
       <button class="btn btn-block btn-success">
         Create Dish
