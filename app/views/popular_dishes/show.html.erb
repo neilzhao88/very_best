@@ -6,10 +6,22 @@
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>Venue</dt>
-      <dd><%= @popular_dish.venue_id %></dd>
+      <dd>
+        <% if @popular_dish.venue.present? %>
+          <a href="/venues/<%= @popular_dish.venue_id %>">
+            <%= @popular_dish.venue.name %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Favorites</dt>
-      <dd><%= @popular_dish.favorites_id %></dd>
+      <dd>
+        <% if @popular_dish.favorites.present? %>
+          <a href="/favorites/<%= @popular_dish.favorites_id %>">
+            <%= @popular_dish.favorites.dish_id %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 
